@@ -87,6 +87,12 @@ const EXAMPLES: &[ExampleDesc] = &[
         webgpu: true,
     },
     ExampleDesc {
+        name: "multiple_render_targets",
+        function: wgpu_examples::multiple_render_targets::main,
+        webgl: false,
+        webgpu: true,
+    },
+    ExampleDesc {
         name: "render_to_texture",
         function: wgpu_examples::render_to_texture::main,
         webgl: false, // No canvas for WebGL
@@ -151,6 +157,36 @@ const EXAMPLES: &[ExampleDesc] = &[
         function: wgpu_examples::water::main,
         webgl: false, // No RODS
         webgpu: true,
+    },
+    ExampleDesc {
+        name: "ray_cube_compute",
+        function: wgpu_examples::ray_cube_compute::main,
+        webgl: false,  // No Ray-tracing extensions
+        webgpu: false, // No Ray-tracing extensions (yet)
+    },
+    ExampleDesc {
+        name: "ray_cube_fragment",
+        function: wgpu_examples::ray_cube_fragment::main,
+        webgl: false,  // No Ray-tracing extensions
+        webgpu: false, // No Ray-tracing extensions (yet)
+    },
+    ExampleDesc {
+        name: "ray_scene",
+        function: wgpu_examples::ray_scene::main,
+        webgl: false,  // No Ray-tracing extensions
+        webgpu: false, // No Ray-tracing extensions (yet)
+    },
+    ExampleDesc {
+        name: "ray_shadows",
+        function: wgpu_examples::ray_shadows::main,
+        webgl: false,  // No Ray-tracing extensions
+        webgpu: false, // No Ray-tracing extensions (yet)
+    },
+    ExampleDesc {
+        name: "ray_traced_triangle",
+        function: wgpu_examples::ray_traced_triangle::main,
+        webgl: false,
+        webgpu: false,
     },
 ];
 

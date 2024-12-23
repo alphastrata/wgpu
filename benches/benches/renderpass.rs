@@ -11,9 +11,9 @@ use rayon::iter::{IntoParallelIterator, ParallelIterator};
 use crate::DeviceState;
 
 fn draw_count() -> usize {
-    // On CI we only want to run a very lightweight version of the benchmark
+    // When testing we only want to run a very lightweight version of the benchmark
     // to ensure that it does not break.
-    if std::env::var("WGPU_TESTING").is_ok() {
+    if std::env::var("NEXTEST").is_ok() {
         8
     } else {
         10_000
@@ -367,7 +367,7 @@ impl RenderpassState {
         let end_idx = start_idx + draws_per_pass;
         for draw_idx in start_idx..end_idx {
             render_pass.set_pipeline(&self.pipeline);
-            render_pass.set_bind_group(0, Some(&self.bind_groups[draw_idx]), &[]);
+            render_pass.set_bind_group(0, &self.bind_groups[draw_idx], &[]);
             for i in 0..VERTEX_BUFFERS_PER_DRAW {
                 render_pass.set_vertex_buffer(
                     i as u32,

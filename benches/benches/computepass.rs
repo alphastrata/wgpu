@@ -11,9 +11,9 @@ use rayon::iter::{IntoParallelIterator, ParallelIterator};
 use crate::DeviceState;
 
 fn dispatch_count() -> usize {
-    // On CI we only want to run a very lightweight version of the benchmark
+    // When testing we only want to run a very lightweight version of the benchmark
     // to ensure that it does not break.
-    if std::env::var("WGPU_TESTING").is_ok() {
+    if std::env::var("NEXTEST").is_ok() {
         8
     } else {
         10_000
@@ -28,7 +28,7 @@ fn dispatch_count() -> usize {
 fn dispatch_count_bindless() -> usize {
     // On CI we only want to run a very lightweight version of the benchmark
     // to ensure that it does not break.
-    if std::env::var("WGPU_TESTING").is_ok() {
+    if std::env::var("NEXTEST").is_ok() {
         8
     } else {
         1_000
@@ -389,7 +389,7 @@ impl ComputepassState {
         let end_idx = start_idx + dispatch_per_pass;
         for dispatch_idx in start_idx..end_idx {
             compute_pass.set_pipeline(&self.pipeline);
-            compute_pass.set_bind_group(0, Some(&self.bind_groups[dispatch_idx]), &[]);
+            compute_pass.set_bind_group(0, &self.bind_groups[dispatch_idx], &[]);
             compute_pass.dispatch_workgroups(1, 1, 1);
         }
 

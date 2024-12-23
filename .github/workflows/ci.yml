@@ -34,9 +34,9 @@ env:
   # We sometimes need nightly to use special things in CI.
   #
   # In order to prevent CI regressions, we pin the nightly version.
-  NIGHTLY_VERSION: "nightly-2023-12-17"
+  NIGHTLY_VERSION: "nightly-2024-10-10"
   # This is the MSRV used by `wgpu` itself and all surrounding infrastructure.
-  REPO_MSRV: "1.76"
+  REPO_MSRV: "1.83"
   # This is the MSRV used by the `wgpu-core`, `wgpu-hal`, and `wgpu-types` crates,
   # to ensure that they can be used with firefox.
   CORE_MSRV: "1.76"
@@ -614,13 +614,22 @@ jobs:
           rustup override set ${{ env.REPO_MSRV }}
           cargo -V
 
-      - name: run rustfmt
+      - name: Run `cargo fmt`
         run: |
           cargo fmt -- --check
           cargo fmt --manifest-path xtask/Cargo.toml -- --check
+          cargo fmt --manifest-path naga/xtask/Cargo.toml -- --check
+
+      - name: Install Taplo
+        uses: uncenter/setup-taplo@v1
+        with:
+          version: "0.9.3"
+
+      - name: run `taplo fmt`
+        run: taplo format --check --diff
 
       - name: Check for typos
-        uses: crate-ci/typos@v1.24.6
+        uses: crate-ci/typos@v1.28.4
 
   check-cts-runner:
     # runtime is normally 2 minutes
