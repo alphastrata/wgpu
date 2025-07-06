@@ -24,6 +24,7 @@ pub mod ray_shadows;
 pub mod ray_traced_triangle;
 pub mod render_to_texture;
 pub mod repeated_compute;
+pub mod reusing_buffers;
 pub mod shadow;
 pub mod skybox;
 pub mod srgb_blend;

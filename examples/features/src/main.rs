@@ -93,6 +93,12 @@ const EXAMPLES: &[ExampleDesc] = &[
         webgpu: true,
     },
     ExampleDesc {
+        name: "reusing_buffers",
+        function: wgpu_examples::reusing_buffers::main,
+        webgl: false, // No compute
+        webgpu: true,
+    },
+    ExampleDesc {
         name: "shadow",
         function: wgpu_examples::shadow::main,
         webgl: true,
