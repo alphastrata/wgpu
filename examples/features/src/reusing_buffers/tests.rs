@@ -2,7 +2,7 @@ use super::*;
 use wgpu_test::{gpu_test, GpuTestConfiguration, TestParameters};
 
 #[gpu_test]
-static TWO_BUFFERS: GpuTestConfiguration = GpuTestConfiguration::new()
+static REUSING_BUFFERS: GpuTestConfiguration = GpuTestConfiguration::new()
     .parameters(TestParameters::default().downlevel_flags(wgpu::DownlevelFlags::COMPUTE_SHADERS))
     .run_async(|ctx| {
         let data = vec![0u32; 1024];
